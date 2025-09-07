@@ -1,0 +1,136 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2><i class="bi bi-people-fill me-2"></i>Gestion des Profils</h2>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-primary" (click)="addNew()">
+                <i class="bi bi-plus-circle me-2"></i>Nouveau Profil
+            </button>
+        </div>
+    </div>
+
+    <!-- Error Alert -->
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+        <button type="button" class="btn-close" (click)="error = ''" aria-label="Close"></button>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Chargement...</span>
+        </div>
+    </div>
+
+    <!-- Profils Table -->
+    <div *ngIf="!loading" class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">
+                <i class="bi bi-list-ul me-2"></i>Liste des Profils ({{ profils.length }})
+            </h5>
+        </div>
+        <div class="card-body">
+            <div *ngIf="profils.length === 0" class="text-center py-4">
+                <i class="bi bi-person-x display-1 text-muted"></i>
+                <p class="text-muted mt-3">Aucun profil trouvé</p>
+            </div>
+
+            <div *ngIf="profils.length > 0" class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Type de Profil</th>
+                            <th>État</th>
+                            <th>Applications</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let profil of profils">
+                            <td>
+                                <strong>{{ profil.nom }}</strong>
+                            </td>
+                            <td>
+                                <span class="text-truncate d-inline-block" style="max-width: 200px;"
+                                    [title]="profil.description">
+                                    {{ profil.description || '-' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-secondary">{{ profil.typeProfil || 'N/A' }}</span>
+                            </td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" [checked]="profil.actif"
+                                        (change)="toggleStatus(profil)">
+                                    <label class="form-check-label">
+                                        {{ profil.actif ? 'Actif' : 'Inactif' }}
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-primary">{{ profil.nombreApplications || 0 }}</span>
+                                <button class="btn btn-sm btn-outline-primary ms-2"
+                                    (click)="manageApplications(profil.id)" title="Gérer les applications">
+                                    <i class="bi bi-gear"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-sm btn-outline-info" (click)="viewProfil(profil.id)"
+                                        title="Voir les détails">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" (click)="editProfil(profil.id)"
+                                        title="Modifier">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(profil)"
+                                        title="Supprimer">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" [class.show]="showDeleteModal" [style.display]="showDeleteModal ? 'block' : 'none'"
+    tabindex="-1" *ngIf="showDeleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+                    Confirmer la suppression
+                </h5>
+                <button type="button" class="btn-close" (click)="closeDeleteModal()"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer le profil <strong>{{ profilToDelete?.nom }}</strong> ?</p>
+                <div class="alert alert-warning">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Cette action est irréversible et supprimera également toutes les associations avec les applications.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">
+                    <i class="bi bi-x-circle me-2"></i>Annuler
+                </button>
+                <button type="button" class="btn btn-danger" (click)="deleteProfil()">
+                    <i class="bi bi-trash me-2"></i>Supprimer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade" [class.show]="showDeleteModal" *ngIf="showDeleteModal"></div>

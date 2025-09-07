@@ -1,0 +1,147 @@
+<div class="container-fluid">
+  <!-- Header -->
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <h2>
+        <i class="bi bi-info-circle me-2"></i>Détails de l'Application
+      </h2>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/applications" class="text-decoration-none">Applications</a>
+          </li>
+          <li class="breadcrumb-item active">Détails</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-md-4 text-end">
+      <button class="btn btn-outline-secondary me-2" (click)="goBack()">
+        <i class="bi bi-arrow-left me-2"></i>Retour
+      </button>
+      <button *ngIf="application" class="btn btn-primary" (click)="editApplication()">
+        <i class="bi bi-pencil me-2"></i>Modifier
+      </button>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div *ngIf="error" class="alert alert-danger">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+  </div>
+
+  <!-- Application Details -->
+  <div *ngIf="!loading && application" class="row">
+    <!-- Informations principales -->
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-info-square me-2"></i>Informations Générales
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="text-muted">Nom</h6>
+              <p class="fw-bold">{{ application.nom }}</p>
+            </div>
+            <div class="col-md-6">
+              <h6 class="text-muted">Version</h6>
+              <p>
+                <span class="badge bg-info">{{ application.version || 'N/A' }}</span>
+              </p>
+            </div>
+            <div class="col-12">
+              <h6 class="text-muted">Description</h6>
+              <p>{{ application.description || 'Aucune description disponible' }}</p>
+            </div>
+            <div class="col-md-6" *ngIf="application.url">
+              <h6 class="text-muted">URL</h6>
+              <p>
+                <a [href]="application.url" target="_blank" class="text-decoration-none">
+                  <i class="bi bi-link-45deg me-1"></i>{{ application.url }}
+                </a>
+              </p>
+            </div>
+            <div class="col-md-6" *ngIf="application.icone">
+              <h6 class="text-muted">Icône</h6>
+              <p>
+                <i [class]="application.icone" class="fs-4 me-2"></i>
+                <small class="text-muted">{{ application.icone }}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statut et informations -->
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-gear me-2"></i>Statut et Configuration
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <h6 class="text-muted">Statut</h6>
+            <span class="badge bg-secondary fs-6">{{ application.statut || 'N/A' }}</span>
+          </div>
+
+          <div class="mb-3">
+            <h6 class="text-muted">État</h6>
+            <span [class]="application.actif ? 'badge bg-success' : 'badge bg-danger'" class="fs-6">
+              <i [class]="application.actif ? 'bi bi-check-circle' : 'bi bi-x-circle'" class="me-1"></i>
+              {{ application.actif ? 'Actif' : 'Inactif' }}
+            </span>
+          </div>
+
+          <div class="mb-3">
+            <h6 class="text-muted">Profils associés</h6>
+            <span class="badge bg-primary fs-6">{{ application.nombreProfils || 0 }} profil(s)</span>
+          </div>
+
+          <div class="mb-3">
+            <h6 class="text-muted">Date de création</h6>
+            <p class="small">{{ application.createdAt | date:'dd/MM/yyyy à HH:mm' }}</p>
+          </div>
+
+          <div *ngIf="application.updatedAt">
+            <h6 class="text-muted">Dernière modification</h6>
+            <p class="small">{{ application.updatedAt | date:'dd/MM/yyyy à HH:mm' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions rapides -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-lightning me-2"></i>Actions Rapides
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="d-grid gap-2">
+            <button class="btn btn-outline-primary" (click)="editApplication()">
+              <i class="bi bi-pencil me-2"></i>Modifier l'application
+            </button>
+            <button class="btn btn-outline-info" *ngIf="application.url" (click)="openApplication()">
+              <i class="bi bi-box-arrow-up-right me-2"></i>Ouvrir l'application
+            </button>
+            <button class="btn btn-outline-secondary" routerLink="/profils">
+              <i class="bi bi-people me-2"></i>Voir les profils
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

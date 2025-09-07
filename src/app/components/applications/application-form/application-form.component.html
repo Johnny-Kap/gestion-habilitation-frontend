@@ -1,0 +1,135 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>
+                <i class="bi bi-plus-circle me-2" *ngIf="!isEditMode"></i>
+                <i class="bi bi-pencil me-2" *ngIf="isEditMode"></i>
+                {{ isEditMode ? 'Modifier Application' : 'Nouvelle Application' }}
+            </h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/applications" class="text-decoration-none">Applications</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ isEditMode ? 'Modifier' : 'Nouveau' }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Alerts -->
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+        <button type="button" class="btn-close" (click)="error = ''" aria-label="Close"></button>
+    </div>
+
+    <div *ngIf="success" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle-fill me-2"></i>{{ success }}
+        <button type="button" class="btn-close" (click)="success = ''" aria-label="Close"></button>
+    </div>
+
+    <!-- Form -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">
+                <i class="bi bi-form-text me-2"></i>Informations de l'Application
+            </h5>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <!-- Nom -->
+                    <div class="col-md-6 mb-3">
+                        <label for="nom" class="form-label">
+                            Nom <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('nom')" id="nom"
+                            formControlName="nom" placeholder="Nom de l'application">
+                        <div *ngIf="isFieldInvalid('nom')" class="invalid-feedback">
+                            {{ getFieldError('nom') }}
+                        </div>
+                    </div>
+
+                    <!-- Version -->
+                    <div class="col-md-6 mb-3">
+                        <label for="version" class="form-label">Version</label>
+                        <input type="text" class="form-control" id="version" formControlName="version"
+                            placeholder="Ex: 1.0.0">
+                    </div>
+
+                    <!-- Description -->
+                    <div class="col-12 mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" formControlName="description" rows="3"
+                            placeholder="Description de l'application"></textarea>
+                    </div>
+
+                    <!-- URL -->
+                    <div class="col-md-8 mb-3">
+                        <label for="url" class="form-label">URL</label>
+                        <input type="url" class="form-control" [class.is-invalid]="isFieldInvalid('url')" id="url"
+                            formControlName="url" placeholder="https://exemple.com">
+                        <div *ngIf="isFieldInvalid('url')" class="invalid-feedback">
+                            {{ getFieldError('url') }}
+                        </div>
+                    </div>
+
+                    <!-- Icône -->
+                    <div class="col-md-4 mb-3">
+                        <label for="icone" class="form-label">Icône</label>
+                        <select class="form-select" id="icone" formControlName="icone">
+                            <option value="">Choisir une icône</option>
+                            <option *ngFor="let option of iconeOptions" [value]="option.value">
+                                {{ option.label }}
+                            </option>
+                        </select>
+                        <div *ngIf="applicationForm.get('icone')?.value" class="mt-2">
+                            <small class="text-muted">Aperçu: </small>
+                            <i [class]="applicationForm.get('icone')?.value" class="ms-2"></i>
+                        </div>
+                    </div>
+
+                    <!-- Statut -->
+                    <div class="col-md-6 mb-3">
+                        <label for="statut" class="form-label">Statut</label>
+                        <select class="form-select" id="statut" formControlName="statut">
+                            <option *ngFor="let option of statutOptions" [value]="option.value">
+                                {{ option.label }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Actif -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">État</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="actif" formControlName="actif">
+                            <label class="form-check-label" for="actif">
+                                Application active
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="row">
+                    <div class="col-12">
+                        <hr>
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-secondary" (click)="cancel()" [disabled]="loading">
+                                <i class="bi bi-x-circle me-2"></i>Annuler
+                            </button>
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="loading || applicationForm.invalid">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                                <i *ngIf="!loading" class="bi bi-check-circle me-2"></i>
+                                {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

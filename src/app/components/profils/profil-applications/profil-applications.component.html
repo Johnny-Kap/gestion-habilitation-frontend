@@ -1,0 +1,217 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>
+                <i class="bi bi-gear me-2"></i>Gestion des Applications
+            </h2>
+            <h5 class="text-muted" *ngIf="profil">Profil: {{ profil.nom }}</h5>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/profils" class="text-decoration-none">Profils</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a [routerLink]="['/profils/detail', profilId]" class="text-decoration-none">Détails</a>
+                    </li>
+                    <li class="breadcrumb-item active">Applications</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-outline-secondary me-2" (click)="goBack()">
+                <i class="bi bi-arrow-left me-2"></i>Retour
+            </button>
+            <button class="btn btn-primary" (click)="openAddModal()" [disabled]="availableApplications.length === 0">
+                <i class="bi bi-plus-circle me-2"></i>Ajouter Applications
+            </button>
+        </div>
+    </div>
+
+    <!-- Alerts -->
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+        <button type="button" class="btn-close" (click)="error = ''" aria-label="Close"></button>
+    </div>
+
+    <div *ngIf="success" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle-fill me-2"></i>{{ success }}
+        <button type="button" class="btn-close" (click)="success = ''" aria-label="Close"></button>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Chargement...</span>
+        </div>
+    </div>
+
+    <!-- Applications associées -->
+    <div *ngIf="!loading && profil" class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">
+                <i class="bi bi-grid-3x3-gap me-2"></i>
+                Applications Associées ({{ profil.applications?.length || 0 }})
+            </h5>
+            <div>
+                <small class="text-muted">
+                    {{ availableApplications.length }} application(s) disponible(s) pour association
+                </small>
+            </div>
+        </div>
+        <div class="card-body">
+            <div *ngIf="!profil.applications || profil.applications.length === 0" class="text-center py-4">
+                <i class="bi bi-inbox display-4 text-muted"></i>
+                <p class="text-muted mt-3">Aucune application associée à ce profil</p>
+                <button class="btn btn-primary" (click)="openAddModal()"
+                    [disabled]="availableApplications.length === 0">
+                    <i class="bi bi-plus-circle me-2"></i>Associer des applications
+                </button>
+            </div>
+
+            <div *ngIf="profil.applications && profil.applications.length > 0" class="row">
+                <div *ngFor="let app of profil.applications" class="col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100 border-start border-primary border-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="flex-grow-1">
+                                    <h6 class="card-title">
+                                        <i *ngIf="app.icone" [class]="app.icone" class="me-2"></i>
+                                        {{ app.nom }}
+                                    </h6>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger" (click)="confirmRemoveApplication(app)"
+                                    title="Dissocier l'application">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+
+                            <p class="card-text small text-muted">
+                                {{ app.description || 'Aucune description' }}
+                            </p>
+
+                            <div class="d-flex flex-wrap gap-1 mb-2">
+                                <span *ngIf="app.version" class="badge bg-info text-dark">{{ app.version }}</span>
+                                <span *ngIf="app.statut" class="badge bg-secondary">{{ app.statut }}</span>
+                                <span [class]="app.actif ? 'badge bg-success' : 'badge bg-danger'">
+                                    {{ app.actif ? 'Actif' : 'Inactif' }}
+                                </span>
+                            </div>
+
+                            <div class="d-flex gap-1">
+                                <button *ngIf="app.url" class="btn btn-sm btn-outline-primary"
+                                    (click)="openUrl(app.url)" title="Ouvrir l'application">
+                                    <i class="bi bi-box-arrow-up-right"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info"
+                                    [routerLink]="['/applications/detail', app.id]" title="Voir les détails">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal d'ajout d'applications -->
+<div class="modal fade" [class.show]="showAddModal" [style.display]="showAddModal ? 'block' : 'none'" tabindex="-1"
+    *ngIf="showAddModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-plus-circle me-2"></i>Ajouter des Applications
+                </h5>
+                <button type="button" class="btn-close" (click)="closeAddModal()"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="availableApplications.length === 0" class="text-center py-3">
+                    <i class="bi bi-check-circle display-4 text-success"></i>
+                    <p class="text-muted mt-3">Toutes les applications disponibles sont déjà associées à ce profil.</p>
+                </div>
+
+                <div *ngIf="availableApplications.length > 0">
+                    <p class="text-muted">Sélectionnez les applications à associer au profil :</p>
+                    <div class="row">
+                        <div *ngFor="let app of availableApplications" class="col-md-6 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" [id]="'add-app-' + app.id"
+                                    (change)="onApplicationSelectChange(app.id!, $event)">
+                                <label class="form-check-label" [for]="'add-app-' + app.id">
+                                    <div class="d-flex align-items-center">
+                                        <i *ngIf="app.icone" [class]="app.icone" class="me-2"></i>
+                                        <div>
+                                            <strong>{{ app.nom }}</strong>
+                                            <div class="text-muted small" *ngIf="app.description">
+                                                {{ app.description }}
+                                            </div>
+                                            <div class="d-flex gap-1 mt-1">
+                                                <span *ngIf="app.version" class="badge bg-info text-dark">{{ app.version
+                                                    }}</span>
+                                                <span *ngIf="app.statut" class="badge bg-secondary">{{ app.statut
+                                                    }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            <i class="bi bi-info-circle me-1"></i>
+                            {{ selectedApplicationsToAdd.length }} application(s) sélectionnée(s)
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeAddModal()">
+                    <i class="bi bi-x-circle me-2"></i>Annuler
+                </button>
+                <button type="button" class="btn btn-primary" (click)="addSelectedApplications()"
+                    [disabled]="selectedApplicationsToAdd.length === 0">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Associer ({{ selectedApplicationsToAdd.length }})
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade" [class.show]="showAddModal" *ngIf="showAddModal"></div>
+
+<!-- Modal de confirmation de suppression -->
+<div class="modal fade" [class.show]="showRemoveModal" [style.display]="showRemoveModal ? 'block' : 'none'"
+    tabindex="-1" *ngIf="showRemoveModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+                    Confirmer la dissociation
+                </h5>
+                <button type="button" class="btn-close" (click)="closeRemoveModal()"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir dissocier l'application <strong>{{ applicationToRemove?.nom }}</strong> de
+                    ce profil ?</p>
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    L'application ne sera pas supprimée, elle sera simplement dissociée de ce profil.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeRemoveModal()">
+                    <i class="bi bi-x-circle me-2"></i>Annuler
+                </button>
+                <button type="button" class="btn btn-warning" (click)="removeApplication()">
+                    <i class="bi bi-unlink me-2"></i>Dissocier
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade" [class.show]="showRemoveModal" *ngIf="showRemoveModal"></div>

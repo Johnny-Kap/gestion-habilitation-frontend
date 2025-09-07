@@ -1,0 +1,158 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1><i class="bi bi-speedometer2 me-2"></i>Tableau de Bord</h1>
+            <p class="text-muted">Gestion des Habilitations - Vue d'ensemble</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Carte Applications -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card border-start border-primary border-4 h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted">Applications</h6>
+                            <h3 class="text-primary">{{ stats.totalApplications || 0 }}</h3>
+                            <small class="text-muted">{{ stats.activeApplications || 0 }} actives</small>
+                        </div>
+                        <div class="text-primary">
+                            <i class="bi bi-grid-3x3-gap-fill fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <a routerLink="/applications" class="text-decoration-none">
+                        <small>Voir toutes les applications <i class="bi bi-arrow-right"></i></small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte Profils -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card border-start border-success border-4 h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted">Profils</h6>
+                            <h3 class="text-success">{{ stats.totalProfils || 0 }}</h3>
+                            <small class="text-muted">{{ stats.activeProfils || 0 }} actifs</small>
+                        </div>
+                        <div class="text-success">
+                            <i class="bi bi-people-fill fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <a routerLink="/profils" class="text-decoration-none">
+                        <small>Voir tous les profils <i class="bi bi-arrow-right"></i></small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte Associations -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card border-start border-info border-4 h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted">Associations</h6>
+                            <h3 class="text-info">{{ stats.totalAssociations || 0 }}</h3>
+                            <small class="text-muted">Profil-Application</small>
+                        </div>
+                        <div class="text-info">
+                            <i class="bi bi-link-45deg fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <small class="text-muted">Liens actifs dans le système</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte Actions Rapides -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card border-start border-warning border-4 h-100">
+                <div class="card-body">
+                    <div class="text-center">
+                        <h6 class="text-muted">Actions Rapides</h6>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary btn-sm" routerLink="/applications/new">
+                                <i class="bi bi-plus-circle me-2"></i>Nouvelle App
+                            </button>
+                            <button class="btn btn-outline-success btn-sm" routerLink="/profils/new">
+                                <i class="bi bi-plus-circle me-2"></i>Nouveau Profil
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activité récente -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-clock-history me-2"></i>Activité Récente
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="bi bi-plus-circle text-success me-2"></i>
+                                Application "CRM Pro" créée
+                            </div>
+                            <small class="text-muted">Il y a 2 heures</small>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="bi bi-pencil text-warning me-2"></i>
+                                Profil "Manager" modifié
+                            </div>
+                            <small class="text-muted">Il y a 4 heures</small>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="bi bi-link text-info me-2"></i>
+                                3 applications associées au profil "Admin"
+                            </div>
+                            <small class="text-muted">Hier</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-info-circle me-2"></i>Informations Système
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <strong>Version:</strong> 1.0.0
+                        </li>
+                        <li class="mb-2">
+                            <strong>Dernière sauvegarde:</strong> {{ lastBackup | date:'dd/MM/yyyy HH:mm' }}
+                        </li>
+                        <li class="mb-2">
+                            <strong>Statut:</strong>
+                            <span class="badge bg-success">En ligne</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

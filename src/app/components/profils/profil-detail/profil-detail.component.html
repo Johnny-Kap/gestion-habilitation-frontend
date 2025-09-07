@@ -1,0 +1,169 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>
+                <i class="bi bi-person-circle me-2"></i>Détails du Profil
+            </h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/profils" class="text-decoration-none">Profils</a>
+                    </li>
+                    <li class="breadcrumb-item active">Détails</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-outline-secondary me-2" (click)="goBack()">
+                <i class="bi bi-arrow-left me-2"></i>Retour
+            </button>
+            <button *ngIf="profil" class="btn btn-primary" (click)="editProfil()">
+                <i class="bi bi-pencil me-2"></i>Modifier
+            </button>
+        </div>
+    </div>
+
+    <!-- Error Alert -->
+    <div *ngIf="error" class="alert alert-danger">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Chargement...</span>
+        </div>
+    </div>
+
+    <!-- Profil Details -->
+    <div *ngIf="!loading && profil" class="row">
+        <!-- Informations principales -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-person-badge me-2"></i>Informations du Profil
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-person-circle display-4 text-primary"></i>
+                        <h4 class="mt-2">{{ profil.nom }}</h4>
+                        <span [class]="profil.actif ? 'badge bg-success' : 'badge bg-danger'" class="fs-6">
+                            <i [class]="profil.actif ? 'bi bi-check-circle' : 'bi bi-x-circle'" class="me-1"></i>
+                            {{ profil.actif ? 'Actif' : 'Inactif' }}
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-muted">Type de Profil</h6>
+                        <span class="badge bg-secondary fs-6">{{ profil.typeProfil || 'N/A' }}</span>
+                    </div>
+
+                    <div class="mb-3" *ngIf="profil.description">
+                        <h6 class="text-muted">Description</h6>
+                        <p>{{ profil.description }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-muted">Nombre d'applications</h6>
+                        <span class="badge bg-primary fs-6">{{ profil.applications?.length || 0 }} application(s)</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-muted">Date de création</h6>
+                        <p class="small">{{ profil.createdAt | date:'dd/MM/yyyy à HH:mm' }}</p>
+                    </div>
+
+                    <div *ngIf="profil.updatedAt">
+                        <h6 class="text-muted">Dernière modification</h6>
+                        <p class="small">{{ profil.updatedAt | date:'dd/MM/yyyy à HH:mm' }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions rapides -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-lightning me-2"></i>Actions Rapides
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary" (click)="editProfil()">
+                            <i class="bi bi-pencil me-2"></i>Modifier le profil
+                        </button>
+                        <button class="btn btn-outline-info" (click)="manageApplications()">
+                            <i class="bi bi-gear me-2"></i>Gérer les applications
+                        </button>
+                        <button class="btn btn-outline-secondary" routerLink="/applications">
+                            <i class="bi bi-grid-3x3-gap me-2"></i>Voir les applications
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications associées -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-grid-3x3-gap me-2"></i>Applications Associées ({{ profil.applications?.length ||
+                        0 }})
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="!profil.applications || profil.applications.length === 0" class="text-center py-4">
+                        <i class="bi bi-inbox display-4 text-muted"></i>
+                        <p class="text-muted mt-3">Aucune application associée à ce profil</p>
+                        <button class="btn btn-primary" (click)="manageApplications()">
+                            <i class="bi bi-plus-circle me-2"></i>Associer des applications
+                        </button>
+                    </div>
+
+                    <div *ngIf="profil.applications && profil.applications.length > 0" class="row">
+                        <div *ngFor="let app of profil.applications" class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100 border-start border-primary border-3">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start justify-content-between">
+                                        <div class="flex-grow-1">
+                                            <h6 class="card-title">
+                                                <i *ngIf="app.icone" [class]="app.icone" class="me-2"></i>
+                                                {{ app.nom }}
+                                            </h6>
+                                            <p class="card-text small text-muted">
+                                                {{ app.description || 'Aucune description' }}
+                                            </p>
+                                            <div class="d-flex gap-1 mb-2">
+                                                <span *ngIf="app.version" class="badge bg-info text-dark">{{ app.version
+                                                    }}</span>
+                                                <span *ngIf="app.statut" class="badge bg-secondary">{{ app.statut
+                                                    }}</span>
+                                                <span [class]="app.actif ? 'badge bg-success' : 'badge bg-danger'">
+                                                    {{ app.actif ? 'Actif' : 'Inactif' }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-1">
+                                        <button *ngIf="app.url" class="btn btn-sm btn-outline-primary"
+                                            (click)="openApplication(app.url!)" title="Ouvrir l'application">
+                                            <i class="bi bi-box-arrow-up-right"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info"
+                                            [routerLink]="['/applications/detail', app.id]" title="Voir les détails">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

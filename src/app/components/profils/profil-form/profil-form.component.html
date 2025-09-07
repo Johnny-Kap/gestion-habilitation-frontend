@@ -1,0 +1,164 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>
+                <i class="bi bi-plus-circle me-2" *ngIf="!isEditMode"></i>
+                <i class="bi bi-pencil me-2" *ngIf="isEditMode"></i>
+                {{ isEditMode ? 'Modifier Profil' : 'Nouveau Profil' }}
+            </h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/profils" class="text-decoration-none">Profils</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ isEditMode ? 'Modifier' : 'Nouveau' }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Alerts -->
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+        <button type="button" class="btn-close" (click)="error = ''" aria-label="Close"></button>
+    </div>
+
+    <div *ngIf="success" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle-fill me-2"></i>{{ success }}
+        <button type="button" class="btn-close" (click)="success = ''" aria-label="Close"></button>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="profilForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <!-- Informations générales -->
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-person me-2"></i>Informations du Profil
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Nom -->
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">
+                                Nom <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('nom')" id="nom"
+                                formControlName="nom" placeholder="Nom du profil">
+                            <div *ngIf="isFieldInvalid('nom')" class="invalid-feedback">
+                                {{ getFieldError('nom') }}
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" formControlName="description" rows="3"
+                                placeholder="Description du profil"></textarea>
+                        </div>
+
+                        <!-- Type de profil -->
+                        <div class="mb-3">
+                            <label for="typeProfil" class="form-label">Type de Profil</label>
+                            <select class="form-select" id="typeProfil" formControlName="typeProfil">
+                                <option *ngFor="let option of typeProfilOptions" [value]="option.value">
+                                    {{ option.label }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Actif -->
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="actif" formControlName="actif">
+                                <label class="form-check-label" for="actif">
+                                    Profil actif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications -->
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-grid-3x3-gap me-2"></i>Applications Associées
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div *ngIf="applications.length === 0" class="text-center py-3">
+                            <i class="bi bi-inbox text-muted"></i>
+                            <p class="text-muted mt-2">Aucune application disponible</p>
+                        </div>
+
+                        <div *ngIf="applications.length > 0" class="row">
+                            <div class="col-12 mb-3">
+                                <small class="text-muted">
+                                    Sélectionnez les applications auxquelles ce profil aura accès :
+                                </small>
+                            </div>
+
+                            <div *ngFor="let app of applications" class="col-12 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [id]="'app-' + app.id"
+                                        [checked]="isApplicationSelected(app.id!)"
+                                        (change)="onApplicationChange(app.id!, $event)">
+                                    <label class="form-check-label" [for]="'app-' + app.id">
+                                        <div class="d-flex align-items-center">
+                                            <i *ngIf="app.icone" [class]="app.icone" class="me-2"></i>
+                                            <div>
+                                                <strong>{{ app.nom }}</strong>
+                                                <div class="text-muted small" *ngIf="app.description">
+                                                    {{ app.description }}
+                                                </div>
+                                                <div class="d-flex gap-1 mt-1" *ngIf="app.version || app.statut">
+                                                    <span *ngIf="app.version" class="badge bg-info text-dark">{{
+                                                        app.version }}</span>
+                                                    <span *ngIf="app.statut" class="badge bg-secondary">{{ app.statut
+                                                        }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle me-1"></i>
+                                {{ selectedApplications.length }} application(s) sélectionnée(s)
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-secondary" (click)="cancel()" [disabled]="loading">
+                                <i class="bi bi-x-circle me-2"></i>Annuler
+                            </button>
+                            <button type="submit" class="btn btn-primary" [disabled]="loading || profilForm.invalid">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                                <i *ngIf="!loading" class="bi bi-check-circle me-2"></i>
+                                {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
