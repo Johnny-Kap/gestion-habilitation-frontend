@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { API_CONFIG } from '../utils/constants';
+import { ConfigService } from '../config/app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  private readonly baseUrl: string;
 
-  private readonly baseUrl = API_CONFIG.BASE_URL;
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // Lire la configuration depuis les variables Docker
+    const config = ConfigService.getConfig();
+    this.baseUrl = config.api.baseUrl;
+  }
 
   get<T>(endpoint: string, params?: any): Observable<T> {
     let httpParams = new HttpParams();
@@ -63,10 +66,8 @@ export class ApiService {
     let errorMessage = 'Une erreur est survenue';
 
     if (error.error instanceof ErrorEvent) {
-      // Erreur côté client
       errorMessage = `Erreur: ${error.error.message}`;
     } else {
-      // Erreur côté serveur
       if (error.error?.message) {
         errorMessage = error.error.message;
       } else {
@@ -78,5 +79,3 @@ export class ApiService {
     return throwError(() => errorMessage);
   }
 }
-
-

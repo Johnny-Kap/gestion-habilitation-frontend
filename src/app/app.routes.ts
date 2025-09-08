@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 // Pages
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -12,25 +13,62 @@ import { ProfilFormComponent } from './components/profils/profil-form/profil-for
 import { ProfilDetailComponent } from './components/profils/profil-detail/profil-detail.component';
 import { ProfilApplicationsComponent } from './components/profils/profil-applications/profil-applications.component';
 
-export const routes: Routes = [  // ← Ajoutez 'export' ici
-  // Route par défaut
+export const routes: Routes = [
+  // Route par défaut - SANS protection pour permettre la redirection initiale
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   
-  // Dashboard
-  { path: 'dashboard', component: DashboardComponent },
-  
-  // Applications
-  { path: 'applications', component: ApplicationsComponent },
-  { path: 'applications/new', component: ApplicationFormComponent },
-  { path: 'applications/edit/:id', component: ApplicationFormComponent },
-  { path: 'applications/detail/:id', component: ApplicationDetailComponent },
-  
-  // Profils
-  { path: 'profils', component: ProfilsComponent },
-  { path: 'profils/new', component: ProfilFormComponent },
-  { path: 'profils/edit/:id', component: ProfilFormComponent },
-  { path: 'profils/detail/:id', component: ProfilDetailComponent },
-  { path: 'profils/:id/applications', component: ProfilApplicationsComponent },
+  // Routes protégées par Keycloak
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'applications', 
+    component: ApplicationsComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'applications/new', 
+    component: ApplicationFormComponent,
+    canActivate: [AuthGuard],
+    // data: { roles: ['admin'] } // Exemple de rôle requis
+  },
+  { 
+    path: 'applications/edit/:id', 
+    component: ApplicationFormComponent,
+    canActivate: [AuthGuard],
+  },
+  { 
+    path: 'applications/detail/:id', 
+    component: ApplicationDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'profils', 
+    component: ProfilsComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'profils/new', 
+    component: ProfilFormComponent,
+    canActivate: [AuthGuard],
+  },
+  { 
+    path: 'profils/edit/:id', 
+    component: ProfilFormComponent,
+    canActivate: [AuthGuard],
+  },
+  { 
+    path: 'profils/detail/:id', 
+    component: ProfilDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  { 
+    path: 'profils/:id/applications', 
+    component: ProfilApplicationsComponent,
+    canActivate: [AuthGuard],
+  },
   
   // Route 404
   { path: '**', redirectTo: '/dashboard' }

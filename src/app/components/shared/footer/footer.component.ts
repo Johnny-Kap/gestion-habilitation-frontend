@@ -1,29 +1,17 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit  } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
-  imports: [DatePipe],
+  standalone: true,
+  imports: [CommonModule], // Supprimer DatePipe s'il n'est pas utilisé
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit{
-
+export class FooterComponent {
   currentYear: number = new Date().getFullYear();
   lastUpdate: Date = new Date();
   backendStatus: string = 'En ligne';
 
   constructor() { }
-
-  ngOnInit(): void {
-    // Vous pouvez ajouter ici une vérification du statut du backend
-    this.checkBackendStatus();
-  }
-
-  private checkBackendStatus(): void {
-    // Optionnel : vérifier le statut du backend
-    // Ceci pourrait faire un appel à votre API pour vérifier la santé
-    this.backendStatus = 'En ligne';
-  }
-
 }
