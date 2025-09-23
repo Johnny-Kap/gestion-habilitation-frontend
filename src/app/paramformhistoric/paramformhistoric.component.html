@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-12">
+          <mat-divider  style="width: 100%;height: 10px; display: inline-block;background-color:#ca2020;"></mat-divider>
+        <form name="findForm" #findForm="ngForm" style="height: 240px;width:1000px; background-color: whitesmoke;">
+            <mat-form-field class="info">
+                <mat-label>Reference</mat-label>
+                <textarea matInput style="padding: 0;" [(ngModel)]="info.reference" name="reference" readonly></textarea>
+                <!-- <input matInput style="padding: 0;width: 200px" [(ngModel)]="info.reference" name="reference" readonly> -->
+            </mat-form-field> 
+            
+            <mat-form-field class="info">
+                <mat-label>L'utilisateur qui se est connecté</mat-label>
+                <input matInput style="padding: 0;width: 200px" [(ngModel)]="info.utiCreation" name="utiCreation" readonly>
+            </mat-form-field> &nbsp;
+            <mat-form-field class="info">
+                <mat-label>L'utilisateur qui a modifié</mat-label>
+                <input matInput style="padding: 0;width: 200px" [(ngModel)]="info.utiModification" name="utiModification" readonly>
+            </mat-form-field> &nbsp;
+            <mat-form-field class="info">
+                <mat-label>L'utilisateur qui a mis à jour</mat-label>
+                <input matInput style="padding: 0;width: 200px" [(ngModel)]="info.utiChange" name="utiChange" readonly>
+            </mat-form-field> &nbsp;
+
+            <mat-form-field class="info">
+                <mat-label>Date de Creation</mat-label>
+                <input matInput style="padding: 0;width: 300px !important;" [(ngModel)]="info.dateCreation" name="dateCreation" readonly>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Segment</mat-label>
+                <textarea matInput style="padding: 0;" [(ngModel)]="info.segment" name="segment" readonly></textarea>
+
+                <!-- <input matInput style="padding: 0;" [(ngModel)]="info.segment" name="segment" matInput -->
+                 
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 300px!important;">
+                <mat-label>Type de Credit</mat-label>
+                <textarea matInput style="padding: 0;" [(ngModel)]="info.typeCredit" name="typeCredit" readonly></textarea>
+                <!-- <input matInput style="padding: 0;" [(ngModel)]="info.typeCredit" name="typeCredit" matInput
+                   readonly> -->
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Valeur de Seuil</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.valeur" name="valeur" matInput
+                readonly>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>actif</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.actif" name="actif" matInput
+                   readonly>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Amortissable</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.amortissable" name="amortissable" matInput
+                   readonly>
+            </mat-form-field>
+
+
+
+             
+            
+        </form>
+    </div>
+</div>

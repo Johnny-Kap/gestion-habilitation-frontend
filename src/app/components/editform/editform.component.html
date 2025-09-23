@@ -1,0 +1,58 @@
+<div class="edit-form-container">
+    <div class="edit-form-card">
+        <div class="form-header">
+            <h2 class="form-title">
+                <mat-icon>edit</mat-icon>
+                Modifier la Fonction
+            </h2>
+            <p class="form-subtitle">Modifiez les informations de la fonction sélectionnée</p>
+        </div>
+
+        <form name="editForm" #editForm="ngForm" class="modern-edit-form">
+            <div class="form-content">
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>ID de la Fonction</mat-label>
+                        <input matInput
+                               [(ngModel)]="info.fonctionId"
+                               name="fonctionId"
+                               readonly
+                               class="readonly-field">
+                        <mat-icon matSuffix class="readonly-icon">lock</mat-icon>
+                        <mat-hint>Identifiant unique (non modifiable)</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Nom de la Fonction</mat-label>
+                        <input matInput
+                               [(ngModel)]="info.fnom"
+                               name="fnom"
+                               placeholder="Saisissez le nom de la fonction"
+                               required>
+                        <mat-icon matSuffix>work</mat-icon>
+                        <mat-error *ngIf="editForm.controls['fnom']?.invalid && editForm.controls['fnom']?.touched">
+                            Le nom de la fonction est requis
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button mat-raised-button
+                        color="primary"
+                        class="action-btn primary-btn"
+                        (click)="postUpdates(info)"
+                        [disabled]="editForm.invalid">
+                    <mat-icon>save</mat-icon>
+                    Sauvegarder les modifications
+                </button>
+                <button mat-stroked-button
+                        class="action-btn secondary-btn"
+                        (click)="onNoClick()">
+                    <mat-icon>cancel</mat-icon>
+                    Annuler
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

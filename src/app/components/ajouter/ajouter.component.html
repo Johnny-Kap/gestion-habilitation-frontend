@@ -1,0 +1,89 @@
+<div class="form-container">
+    <div class="form-card">
+        <div class="form-header">
+            <h2 class="form-title">
+                <mat-icon>add_circle</mat-icon>
+                Ajouter une nouvelle association
+            </h2>
+            <p class="form-subtitle">Associez une fonction à une application et ses modules</p>
+        </div>
+
+        <form name="addForm" class="modern-form">
+            <div class="form-content">
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Rechercher une fonction</mat-label>
+                        <input type="text"
+                               matInput
+                               [(ngModel)]="mySelectmeme"
+                               [formControl]="myControl"
+                               [matAutocomplete]="auto"
+                               (keyup)="foncGet()"
+                               placeholder="Tapez pour rechercher..."
+                               name="fonction">
+                        <mat-icon matSuffix>work</mat-icon>
+                        <mat-autocomplete #auto="matAutocomplete" class="custom-autocomplete">
+                            <mat-option *ngFor="let itemmeme of filteredOptions | async" [value]="itemmeme">
+                                <div class="autocomplete-option">
+                                    <mat-icon>work</mat-icon>
+                                    <span>{{itemmeme}}</span>
+                                </div>
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Sélectionner une application</mat-label>
+                        <mat-select [(ngModel)]="mySelectApplication"
+                                   (selectionChange)="selectChangememe1()"
+                                   name="appNom"
+                                   placeholder="Choisissez une application">
+                            <mat-option *ngFor="let itemmeme1 of usersmeme1" [value]="itemmeme1.appId">
+                                <div class="select-option">
+                                    <mat-icon>apps</mat-icon>
+                                    <span>{{itemmeme1.appNom}}</span>
+                                </div>
+                            </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>apps</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field full-width">
+                        <mat-label>Sélectionner les modules</mat-label>
+                        <mat-select (selectionChange)="onUserModulesChange($event.value)"
+                                   name="modules"
+                                   [(ngModel)]="usermodules"
+                                   multiple
+                                   placeholder="Choisissez un ou plusieurs modules">
+                            <mat-option *ngFor="let topping of optionsmodule" [value]="topping.moduleId">
+                                <div class="select-option">
+                                    <mat-icon>extension</mat-icon>
+                                    <span>{{topping.mnom}}</span>
+                                </div>
+                            </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>extension</mat-icon>
+                        <mat-hint>Vous pouvez sélectionner plusieurs modules</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button mat-raised-button color="primary"
+                        class="action-btn primary-btn"
+                        (click)="postApplication()">
+                    <mat-icon>save</mat-icon>
+                    Valider l'association
+                </button>
+                <button mat-stroked-button
+                        class="action-btn secondary-btn"
+                        (click)="onNoClick()">
+                    <mat-icon>cancel</mat-icon>
+                    Annuler
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

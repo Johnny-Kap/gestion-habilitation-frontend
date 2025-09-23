@@ -1,0 +1,51 @@
+<div class="info-container">
+    <div class="info-card">
+        <div class="form-header">
+            <h2 class="form-title">
+                <mat-icon>info</mat-icon>
+                Informations sur la Fonction
+            </h2>
+            <p class="form-subtitle">Consultation des paramètres et configurations</p>
+        </div>
+
+        <form name="findForm" #findForm="ngForm" class="modern-info-form">
+            <div class="form-content">
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Sélectionner une Fonction</mat-label>
+                        <mat-select [(ngModel)]="mySelectmeme" (selectionChange)="selectChangememe()" name="fnom">
+                            <mat-option *ngFor="let itemmeme of usersmeme" [value]="itemmeme.fnom">
+                                {{itemmeme.fnom}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>work</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Sélectionner une Application</mat-label>
+                        <mat-select [(ngModel)]="mySelectme" (selectionChange)="selectChangeme()" name="nom">
+                            <mat-option *ngFor="let itemme of usersme" [value]="itemme.nom">
+                                {{itemme.nom}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>apps</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Sélectionner un Module</mat-label>
+                        <mat-select [(ngModel)]="mySelect" (selectionChange)="seleCtChange()" name="mnom">
+                            <mat-option *ngFor="let item of users" [value]="item.mnom">
+                                {{item.mnom}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>extension</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

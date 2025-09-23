@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-md-12">
+          <mat-divider  style="width: 100%;height: 10px; display: inline-block;background-color:#ca2020;"></mat-divider>
+        <form name="findForm" #findForm="ngForm" style="height: 240px;width:1000px; background-color: whitesmoke;">
+            <mat-form-field class="info">
+                <mat-label>utilisateur calcule</mat-label>
+                <input matInput style="padding: 0;width: 200px" [(ngModel)]="info.utiCalcul" name="utiCalcul" readonly>
+            </mat-form-field> &nbsp;
+            <mat-form-field class="info">
+                <mat-label>Date Calcul</mat-label>
+                <input matInput style="padding: 0;width: 200px" [(ngModel)]="info.dateCalcul" name="dateCalcul" readonly>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Segment</mat-label>
+                <textarea matInput style="padding: 0;" [(ngModel)]="info.segment" name="segment" readonly></textarea>                 
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 300px!important;">
+                <mat-label>Type de Credit</mat-label>
+                <textarea matInput style="padding: 0;" [(ngModel)]="info.typeCredit" name="typeCredit" readonly></textarea>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Numero de Prêt</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.numeroPret" name="numeroPret" matInput
+                   readonly>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Reference Dossier Credit</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.referenceDossierCredit" name="referenceDossierCredit" matInput
+                   readonly>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Périodicité  du Credit</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.periodiciteCredit" name="periodiciteCredit" matInput
+                   readonly>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Montant chargé</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.chargesAmount" name="chargesAmount" matInput
+                   readonly>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Base Jour </mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.baseJour" name="baseJour" matInput
+                   readonly>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Valeur de Seuil</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.valeurSeuil" name="valeurSeuil" matInput
+                readonly>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Resultat</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.resultat" name="resultat" matInput
+                   readonly>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="info" style="width: 200px!important;">
+                <mat-label>Decision</mat-label>
+                <input matInput style="padding: 0;" [(ngModel)]="info.decision" name="decision" matInput
+                   readonly>
+            </mat-form-field>
+            
+
+            
+        </form>
+    </div>
+</div>

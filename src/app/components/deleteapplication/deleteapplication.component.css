@@ -1,0 +1,298 @@
+/* Variables CSS cohérentes */
+:root {
+  --primary-color: #ca2020;
+  --primary-light: #e53935;
+  --primary-dark: #b71c1c;
+  --danger-color: #f44336;
+  --warning-color: #ff9800;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #424242;
+  --white: #ffffff;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  --border-radius: 12px;
+}
+
+/* Container principal pour dialog */
+.delete-confirmation-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* Carte de suppression */
+.delete-content {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* En-tête du formulaire */
+.form-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: var(--white);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.form-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.form-title mat-icon {
+  font-size: 1.75rem;
+}
+
+.form-subtitle {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+/* Section d'avertissement */
+.warning-section {
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Icône d'avertissement */
+.warning-icon-container {
+  margin-bottom: 1.5rem;
+}
+
+.warning-icon {
+  font-size: 4rem !important;
+  width: 4rem !important;
+  height: 4rem !important;
+  color: var(--warning-color);
+  background: rgba(255, 152, 0, 0.1);
+  border-radius: 50%;
+  padding: 1rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Message de confirmation */
+.confirmation-message {
+  margin-bottom: 1.5rem;
+}
+
+.confirmation-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.confirmation-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--dark-gray);
+}
+
+.warning-text {
+  font-weight: 600;
+  color: var(--danger-color);
+  font-size: 0.9rem;
+}
+
+/* Détails de l'élément */
+.item-details {
+  margin-bottom: 1.5rem;
+}
+
+.detail-card {
+  background: var(--light-gray);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-left: 4px solid var(--primary-color);
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.detail-icon {
+  color: var(--primary-color);
+  font-size: 1.5rem !important;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.detail-label {
+  font-size: 0.875rem;
+  color: var(--dark-gray);
+  margin-bottom: 0.25rem;
+}
+
+.detail-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Actions du formulaire */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--medium-gray);
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  min-width: 160px;
+  height: 44px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.danger-btn {
+  background: var(--danger-color);
+  color: var(--white);
+  box-shadow: 0 2px 6px rgba(244, 67, 54, 0.3);
+}
+
+.danger-btn:hover {
+  background: #d32f2f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+}
+
+.cancel-btn {
+  border-color: var(--medium-gray);
+  color: var(--dark-gray);
+}
+
+.cancel-btn:hover {
+  background: var(--light-gray);
+  border-color: var(--dark-gray);
+  color: var(--dark-gray);
+}
+
+.action-btn mat-icon {
+  margin-right: 0.5rem;
+}
+
+/* Configuration Material Design */
+::ng-deep .danger-btn {
+  --mdc-filled-button-container-color: var(--danger-color);
+  --mdc-filled-button-label-text-color: var(--white);
+}
+
+::ng-deep .danger-btn:hover {
+  --mdc-filled-button-container-color: #d32f2f;
+}
+
+::ng-deep .cancel-btn {
+  --mdc-outlined-button-outline-color: var(--medium-gray);
+  --mdc-outlined-button-label-text-color: var(--dark-gray);
+}
+
+::ng-deep .cancel-btn:hover {
+  --mdc-outlined-button-outline-color: var(--dark-gray);
+  --mdc-outlined-button-label-text-color: var(--dark-gray);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .delete-confirmation-container {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .form-header {
+    padding: 1rem;
+  }
+
+  .form-title {
+    font-size: 1.25rem;
+  }
+
+  .warning-section {
+    padding: 1.5rem;
+  }
+
+  .confirmation-title {
+    font-size: 1.1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+
+  .action-btn {
+    width: 100%;
+    margin: 0;
+  }
+
+  .warning-icon {
+    font-size: 3rem !important;
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+
+  .detail-card {
+    max-width: 100%;
+  }
+}
+
+/* États focus améliorés */
+.action-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Animation d'entrée pour les détails */
+.item-details {
+  animation: fadeInUp 0.4s ease-out 0.1s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

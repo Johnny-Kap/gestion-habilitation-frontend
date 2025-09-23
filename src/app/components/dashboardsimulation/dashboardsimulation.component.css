@@ -1,0 +1,230 @@
+/* Variables CSS pour la cohérence des couleurs */
+:root {
+  --primary-color: #ca2020;
+  --primary-light: #e53935;
+  --primary-dark: #b71c1c;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --danger-color: #f44336;
+  --info-color: #2196f3;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #424242;
+  --white: #ffffff;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+}
+
+/* Container principal */
+.simulation-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Cartes de section */
+.section-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.section-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* En-tête de carte */
+.card-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  padding: 1.5rem 2rem;
+  color: var(--white);
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-title mat-icon {
+  font-size: 1.25rem;
+}
+
+/* Section de formulaire */
+.form-section {
+  padding: 2rem;
+  background: var(--light-gray);
+}
+
+.simulation-form {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.form-content {
+  padding: 2rem;
+}
+
+.form-title {
+  margin: 0 0 2rem 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--dark-gray);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.form-title mat-icon {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+/* Rangée de formulaire */
+.form-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.form-field {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Actions du formulaire */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid var(--medium-gray);
+}
+
+.action-btn {
+  padding: 0.75rem 2rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.primary-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(202, 32, 32, 0.3);
+}
+
+.cancel-btn {
+  color: var(--dark-gray);
+  border-color: var(--medium-gray);
+}
+
+.cancel-btn:hover {
+  background: var(--light-gray);
+  border-color: var(--dark-gray);
+  transform: translateY(-1px);
+}
+
+/* Configuration des couleurs Material */
+::ng-deep .mat-mdc-raised-button.mat-primary {
+  --mdc-filled-button-container-color: var(--primary-color);
+  --mdc-filled-button-label-text-color: var(--white);
+}
+
+::ng-deep .mat-mdc-raised-button.mat-primary:hover {
+  --mdc-filled-button-container-color: var(--primary-dark);
+}
+
+::ng-deep .mat-mdc-outlined-button {
+  --mdc-outlined-button-outline-color: var(--medium-gray);
+  --mdc-outlined-button-label-text-color: var(--dark-gray);
+}
+
+::ng-deep .mat-mdc-outlined-button:hover {
+  --mdc-outlined-button-outline-color: var(--primary-color);
+}
+
+::ng-deep .mat-mdc-form-field.mat-accent .mat-mdc-select-arrow,
+::ng-deep .mat-mdc-form-field.mat-accent .mat-mdc-text-field-wrapper .mat-mdc-floating-label {
+  color: var(--primary-color);
+}
+
+::ng-deep .mat-mdc-form-field.mat-accent .mdc-notched-outline__leading,
+::ng-deep .mat-mdc-form-field.mat-accent .mdc-notched-outline__notch,
+::ng-deep .mat-mdc-form-field.mat-accent .mdc-notched-outline__trailing {
+  border-color: var(--primary-color);
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--primary-color) !important;
+  border-width: 2px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .simulation-container {
+    margin: 1rem auto;
+    padding: 0 0.5rem;
+  }
+
+  .card-header {
+    padding: 1rem;
+  }
+
+  .form-section {
+    padding: 1rem;
+  }
+
+  .form-content {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .form-field {
+    min-width: auto;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-btn {
+    width: 100%;
+  }
+}
+
+header{
+  background-color: #ca2020 !important;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index:20000 !important;
+}
+

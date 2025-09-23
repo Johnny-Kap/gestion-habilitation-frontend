@@ -1,0 +1,270 @@
+/* Variables CSS cohérentes */
+:root {
+  --primary-color: #ca2020;
+  --primary-light: #e53935;
+  --primary-dark: #b71c1c;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --danger-color: #f44336;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #424242;
+  --white: #ffffff;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  --border-radius: 12px;
+}
+
+/* Container principal pour dialog */
+.edit-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Carte du formulaire d'édition */
+.edit-form-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* En-tête du formulaire */
+.form-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: var(--white);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.form-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.form-title mat-icon {
+  font-size: 1.75rem;
+}
+
+.form-subtitle {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+/* Formulaire moderne */
+.modern-edit-form {
+  padding: 1.5rem;
+}
+
+.form-content {
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Champ en lecture seule */
+.readonly-field {
+  background-color: var(--light-gray) !important;
+  color: var(--dark-gray) !important;
+}
+
+.readonly-icon {
+  color: var(--medium-gray) !important;
+}
+
+/* Styles des champs Material */
+::ng-deep .form-field .mat-mdc-form-field {
+  width: 100%;
+}
+
+::ng-deep .form-field .mdc-notched-outline__leading,
+::ng-deep .form-field .mdc-notched-outline__notch,
+::ng-deep .form-field .mdc-notched-outline__trailing {
+  border-color: var(--medium-gray);
+  border-width: 2px;
+}
+
+::ng-deep .form-field .mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+::ng-deep .form-field .mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+::ng-deep .form-field .mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--primary-color);
+  border-width: 2px;
+}
+
+::ng-deep .form-field .mat-mdc-form-field-label {
+  color: var(--dark-gray);
+}
+
+::ng-deep .form-field .mat-mdc-form-field.mat-focused .mat-mdc-form-field-label {
+  color: var(--primary-color);
+}
+
+/* Icônes Material */
+::ng-deep .form-field .mat-mdc-form-field-icon-suffix mat-icon {
+  color: var(--primary-color);
+}
+
+/* Messages d'erreur */
+::ng-deep .mat-mdc-form-field-error {
+  color: var(--danger-color);
+  font-size: 0.875rem;
+}
+
+/* Messages d'aide */
+::ng-deep .mat-mdc-form-field-hint {
+  color: var(--dark-gray);
+  font-size: 0.875rem;
+}
+
+/* Actions du formulaire */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid var(--medium-gray);
+}
+
+.action-btn {
+  min-width: 140px;
+  height: 44px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: var(--primary-color);
+  color: var(--white);
+  box-shadow: 0 2px 6px rgba(202, 32, 32, 0.3);
+}
+
+.primary-btn:hover:not([disabled]) {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(202, 32, 32, 0.4);
+}
+
+.primary-btn[disabled] {
+  background: var(--medium-gray);
+  color: var(--dark-gray);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.secondary-btn {
+  border-color: var(--medium-gray);
+  color: var(--dark-gray);
+}
+
+.secondary-btn:hover {
+  background: var(--light-gray);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.action-btn mat-icon {
+  margin-right: 0.5rem;
+}
+
+/* Configuration Material Design */
+::ng-deep .mat-mdc-raised-button.mat-primary {
+  --mdc-filled-button-container-color: var(--primary-color);
+  --mdc-filled-button-label-text-color: var(--white);
+}
+
+::ng-deep .mat-mdc-raised-button.mat-primary:hover {
+  --mdc-filled-button-container-color: var(--primary-dark);
+}
+
+::ng-deep .mat-mdc-outlined-button {
+  --mdc-outlined-button-outline-color: var(--medium-gray);
+  --mdc-outlined-button-label-text-color: var(--dark-gray);
+}
+
+::ng-deep .mat-mdc-outlined-button:hover {
+  --mdc-outlined-button-outline-color: var(--primary-color);
+  --mdc-outlined-button-label-text-color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .edit-form-container {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .form-header {
+    padding: 1rem;
+  }
+
+  .form-title {
+    font-size: 1.25rem;
+  }
+
+  .modern-edit-form {
+    padding: 1rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .form-field {
+    min-width: auto;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-btn {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* États de validation */
+::ng-deep .form-field.ng-invalid.ng-touched .mdc-notched-outline__leading,
+::ng-deep .form-field.ng-invalid.ng-touched .mdc-notched-outline__notch,
+::ng-deep .form-field.ng-invalid.ng-touched .mdc-notched-outline__trailing {
+  border-color: var(--danger-color);
+}
+
+::ng-deep .form-field.ng-valid.ng-touched .mdc-notched-outline__leading,
+::ng-deep .form-field.ng-valid.ng-touched .mdc-notched-outline__notch,
+::ng-deep .form-field.ng-valid.ng-touched .mdc-notched-outline__trailing {
+  border-color: var(--success-color);
+}

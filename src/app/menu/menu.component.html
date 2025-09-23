@@ -1,0 +1,36 @@
+
+    <div class="row main justify-content-center"  style="margin-bottom: 50px !important;">
+        <div class="col-md-12 d-flex justify-content-between align-items-center">
+            <ul class="top-level-menu mb-0">
+                <li>
+                    <a [routerLink]="['/dashboard']" routerLinkActive="active">FONCTIONS - APPLICATIONS</a>
+                </li>
+                <li >
+                    <a [routerLink]="['/dashboardteg']" routerLinkActive="active">PARAMETRAGE GENERAL</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/dashboardsimulation']" routerLinkActive="active">APPLICATION - MODULE</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/modules']" routerLinkActive="active">MODULES</a>
+                </li>
+            </ul>
+
+            <!-- User Profile Section -->
+            <div class="user-profile" *ngIf="userProfile">
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user me-2"></i>{{ userProfile.firstName }} {{ userProfile.lastName }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#" (click)="logout($event)">
+                                <i class="fa fa-sign-out me-2"></i>Déconnecter
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>

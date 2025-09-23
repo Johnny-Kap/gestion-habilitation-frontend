@@ -1,0 +1,33 @@
+/* Container principal de l'application - SCROLLING FORCÉ */
+:host {
+  display: block !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+}
+
+.main-app-container {
+  font-size: 12px !important;
+  font: 1.2em/1.583em Arial, Helvetica, sans-serif;
+  background-color: white;
+  width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  overflow: visible !important;
+  position: relative !important;
+  display: block !important;
+}
+
+/* Router outlet container */
+router-outlet + * {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+}

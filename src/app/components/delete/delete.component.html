@@ -1,0 +1,45 @@
+<div class="delete-confirmation-container">
+    <div class="delete-content">
+        <!-- Icône d'avertissement -->
+        <div class="warning-icon-container">
+            <mat-icon class="warning-icon">warning</mat-icon>
+        </div>
+
+        <!-- Message de confirmation -->
+        <div class="confirmation-message">
+            <h2 class="confirmation-title">Confirmer la suppression</h2>
+            <p class="confirmation-text">
+                Êtes-vous sûr de vouloir supprimer cette fonction ?
+                <br>
+                <span class="warning-text">Cette action est irréversible.</span>
+            </p>
+        </div>
+
+        <!-- Détails de l'élément à supprimer -->
+        <div class="item-details" *ngIf="info">
+            <div class="detail-card">
+                <mat-icon class="detail-icon">work</mat-icon>
+                <div class="detail-info">
+                    <span class="detail-label">Fonction à supprimer :</span>
+                    <span class="detail-value">{{ info.fnom || 'Non spécifié' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="confirmation-actions">
+            <button mat-raised-button
+                    class="action-btn danger-btn"
+                    (click)="postDeletes(info)">
+                <mat-icon>delete_forever</mat-icon>
+                Confirmer la suppression
+            </button>
+            <button mat-stroked-button
+                    class="action-btn cancel-btn"
+                    (click)="onNoClick()">
+                <mat-icon>cancel</mat-icon>
+                Annuler
+            </button>
+        </div>
+    </div>
+</div>

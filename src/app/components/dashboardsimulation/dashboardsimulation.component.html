@@ -1,0 +1,50 @@
+<div class="simulation-container">
+    <div class="section-card">
+        <div class="card-header">
+            <h2 class="section-title">
+                <mat-icon>dashboard</mat-icon>
+                Configuration des Applications et leurs modules
+            </h2>
+        </div>
+
+        <div class="form-section">
+            <form name="findForm" #findForm="ngForm" class="simulation-form">
+                <div class="form-content">
+                    <h3 class="form-title">
+                        <mat-icon>settings</mat-icon>
+                        Ajouter un module à une application
+                    </h3>
+
+                    <div class="form-row">
+                        <mat-form-field appearance="outline" class="form-field">
+                            <mat-label>Application</mat-label>
+                            <mat-select [(ngModel)]="mySelectmeme1" (selectionChange)="selectChangememe1()" name="appNom">
+                                <mat-option *ngFor="let itemmeme1 of usersmeme1" [value]="itemmeme1.appId">
+                                    {{itemmeme1.appNom}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix>apps</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="form-field">
+                            <mat-label>Module</mat-label>
+                            <input matInput [(ngModel)]="info.mnom" name="mnom" placeholder="Nom du module">
+                            <mat-icon matSuffix>extension</mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-actions">
+                        <button mat-raised-button color="primary" class="action-btn primary-btn" (click)="postApplication(info)">
+                            <mat-icon>add</mat-icon>
+                            Ajouter
+                        </button>
+                        <button mat-stroked-button class="action-btn cancel-btn" (click)="onNoClick()">
+                            <mat-icon>close</mat-icon>
+                            Annuler
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

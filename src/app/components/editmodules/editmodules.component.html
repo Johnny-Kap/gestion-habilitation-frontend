@@ -1,0 +1,59 @@
+<div class="edit-form-container">
+    <div class="edit-form-card">
+        <div class="form-header">
+            <h2 class="form-title">
+                <mat-icon>edit</mat-icon>
+                Modifier le Module
+            </h2>
+            <p class="form-subtitle">Modifiez les informations du module sélectionné</p>
+        </div>
+
+        <form name="findForm" #findForm="ngForm" class="modern-edit-form">
+            <div class="form-content">
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>ID du Module</mat-label>
+                        <input matInput
+                               [(ngModel)]="info.moduleId"
+                               name="moduleId"
+                               readonly
+                               class="readonly-field">
+                        <mat-icon matSuffix class="readonly-icon">lock</mat-icon>
+                        <mat-hint>Identifiant unique (non modifiable)</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Nom du Module</mat-label>
+                        <input matInput
+                               [(ngModel)]="info.mnom"
+                               name="mnom"
+                               placeholder="Saisissez le nom du module"
+                               required>
+                        <mat-icon matSuffix>extension</mat-icon>
+                        <mat-error *ngIf="findForm.controls['mnom']?.invalid && findForm.controls['mnom']?.touched">
+                            Le nom du module est requis
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button mat-raised-button
+                        color="primary"
+                        class="action-btn primary-btn"
+                        (click)="postUpdatesapplication(info)"
+                        [disabled]="findForm.invalid">
+                    <mat-icon>save</mat-icon>
+                    Sauvegarder les modifications
+                </button>
+                <button mat-stroked-button
+                        class="action-btn secondary-btn"
+                        (click)="onNoClick()"
+                        tabindex="-1">
+                    <mat-icon>cancel</mat-icon>
+                    Annuler
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

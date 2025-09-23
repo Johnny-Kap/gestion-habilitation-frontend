@@ -1,0 +1,209 @@
+<div class="dashboard-main-container">
+    <div class="dashboard-sections">
+        <!-- Section Fonctions -->
+        <div class="dashboard-section" id="fonction">
+            <div class="section-card">
+                <div class="card-header">
+                    <h2 class="section-title">
+                        <mat-icon>engineering</mat-icon>
+                        Gestion des Fonctions avec leurs Applications
+                    </h2>
+                </div>
+                <div class="search-section">
+                    <form name="findForm" #findForm="ngForm" class="search-form">
+                        <div class="form-row" style="align-items: initial !important;">
+                            <mat-form-field appearance="outline" class="search-field">
+                                <mat-label>Rechercher une fonction</mat-label>
+                                <mat-select [(ngModel)]="mySelectmeme" (selectionChange)="selectChangememe()" name="fnom">
+                                    <mat-option *ngFor="let itemmeme of usersmeme" [value]="itemmeme.fnom">
+                                        {{itemmeme.fnom}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-icon matSuffix>search</mat-icon>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" class="search-btn" (click)="searchfonction(info)">
+                                <mat-icon>search</mat-icon>
+                                Rechercher
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-container">
+                    <p-table #dt2 [value]="employeeData" [paginator]="true" [rows]="4"
+                        styleClass="modern-table" dataKey="id" [loading]="loading">
+                        <ng-template pTemplate="caption">
+                            <div class="table-header">
+                                <span class="table-title">Liste des Fonctions</span>
+                                <button mat-raised-button color="primary" class="add-btn" (click)="addBlack()">
+                                    <mat-icon>add</mat-icon>
+                                    Ajouter une application à une fonction
+                                </button>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr class="table-header-row">
+                                <th class="table-header-cell">
+                                    <div class="header-content">
+                                        <mat-icon>tag</mat-icon>
+                                        ID
+                                    </div>
+                                </th>
+                                <th class="table-header-cell">
+                                    <div class="header-content">
+                                        <mat-icon>work</mat-icon>
+                                        Fonction
+                                    </div>
+                                </th>
+                                <th class="table-header-cell actions-header">
+                                    <div class="header-content">
+                                        <mat-icon>settings</mat-icon>
+                                        Actions
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr class="table-row" [class.selected]="selectedItem === item">
+                                <td class="table-cell id-cell">
+                                    <span class="id-badge">{{item.fonctionId}}</span>
+                                </td>
+                                <td class="table-cell name-cell">
+                                    <div class="name-content">
+                                        <mat-icon class="function-icon">work</mat-icon>
+                                        <span class="function-name">{{item.fnom}}</span>
+                                    </div>
+                                </td>
+                                <td class="table-cell actions-cell">
+                                    <div class="action-buttons">
+                                        <button mat-icon-button class="action-btn edit-btn"
+                                                (click)="onEditmat(item)"
+                                                matTooltip="Modifier">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button class="action-btn delete-btn"
+                                                (click)="onDeletemat(item)"
+                                                matTooltip="Supprimer">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="3" class="empty-message">
+                                    <div class="no-data-container">
+                                        <mat-icon class="no-data-icon">work</mat-icon>
+                                        <h3>Aucune fonction</h3>
+                                        <p>Aucune fonction trouvée.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Applications -->
+        <!-- <div class="dashboard-section" id="application">
+            <div class="section-card">
+                <div class="card-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-apps"></i>
+                        Gestion des Applications
+                    </h2>
+                </div>
+                <div class="search-section">
+                    <form name="findForm" #findForm="ngForm" class="search-form">
+                        <div class="form-row">
+                            <mat-form-field appearance="outline" class="search-field">
+                                <mat-label>Rechercher une application</mat-label>
+                                <mat-select [(ngModel)]="mySelectmeme1" (selectionChange)="selectChangememe1()" name="appNom">
+                                    <mat-option *ngFor="let itemmeme1 of usersmeme1" [value]="itemmeme1.appNom">
+                                        {{itemmeme1.appNom}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-icon matSuffix>apps</mat-icon>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" class="search-btn" (click)="searchapplication(info)">
+                                <mat-icon>search</mat-icon>
+                                Rechercher
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-container">
+                    <p-table #dt3 [value]="employeeDataapplication" [paginator]="true" [rows]="4"
+                        styleClass="modern-table" dataKey="id" [loading]="loading">
+                        <ng-template pTemplate="caption">
+                            <div class="table-header">
+                                <span class="table-title">Liste des Applications</span>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr class="table-header-row">
+                                <th class="table-header-cell">
+                                    <div class="header-content">
+                                        <mat-icon>tag</mat-icon>
+                                        ID
+                                    </div>
+                                </th>
+                                <th class="table-header-cell">
+                                    <div class="header-content">
+                                        <mat-icon>apps</mat-icon>
+                                        Application
+                                    </div>
+                                </th>
+                                <th class="table-header-cell actions-header">
+                                    <div class="header-content">
+                                        <mat-icon>settings</mat-icon>
+                                        Actions
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr class="table-row" [class.selected]="selectedItem === item">
+                                <td class="table-cell id-cell">
+                                    <span class="id-badge">{{item.appId}}</span>
+                                </td>
+                                <td class="table-cell name-cell">
+                                    <div class="name-content">
+                                        <mat-icon class="app-icon">apps</mat-icon>
+                                        <span class="app-name">{{item.appNom}}</span>
+                                    </div>
+                                </td>
+                                <td class="table-cell actions-cell">
+                                    <div class="action-buttons">
+                                        <button mat-icon-button class="action-btn edit-btn"
+                                                (click)="onEditmatapplication(item)"
+                                                matTooltip="Modifier">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button class="action-btn delete-btn"
+                                                (click)="onDeletemat(item)"
+                                                matTooltip="Supprimer">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="3" class="empty-message">
+                                    <div class="no-data-container">
+                                        <mat-icon class="no-data-icon">apps</mat-icon>
+                                        <h3>Aucune application</h3>
+                                        <p>Aucune application trouvée.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

@@ -1,0 +1,12 @@
+Bundle-Name: Gestion Habilitation Portlet
+Bundle-SymbolicName: com.yourcompany.gestion.habilitation
+Bundle-Version: 1.0.0
+Bundle-Vendor: Your Company
+Export-Package:\
+\
+Import-Package:\
+\
+Web-ContextPath: /gestionhabilitation
+-contract: *
+-metatype: *
+-sources: true

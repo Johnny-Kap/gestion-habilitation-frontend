@@ -1,0 +1,18 @@
+{
+  "preset": "liferay-npm-bundler-preset-angular-cli",
+  "create-jar": {
+    "output-dir": "dist",
+    "features": {
+      "js-extender": true,
+      "web-context": "/gestionhabilitation",
+      "localization": "features/localization/Language"
+    }
+  },
+  "config": {
+    "imports": {
+      "frontend-js-web": {
+        "/": "*"
+      }
+    }
+  }
+}

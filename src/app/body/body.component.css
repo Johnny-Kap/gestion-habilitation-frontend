@@ -1,0 +1,21 @@
+/* S'assurer que le router-outlet et tout son contenu sont visibles */
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  overflow: visible;
+}
+
+router-outlet {
+  display: block;
+  width: 100%;
+}
+
+router-outlet + * {
+  display: block !important;
+  width: 100% !important;
+  overflow: visible !important;
+  min-height: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

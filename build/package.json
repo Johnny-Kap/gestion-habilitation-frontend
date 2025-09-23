@@ -1,0 +1,11 @@
+{
+  "name": "gestionhabilitation",
+  "version": "1.0.0",
+  "description": "Portlet Gestion Habilitation avec Angular 20",
+  "main": "index.html",
+  "scripts": {},
+  "dependencies": {},
+  "liferayNpmBundler": {
+    "preset": "liferay-npm-bundler-preset-standard"
+  }
+}

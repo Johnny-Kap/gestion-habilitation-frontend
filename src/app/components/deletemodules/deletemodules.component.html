@@ -1,0 +1,56 @@
+<div class="delete-confirmation-container">
+    <div class="delete-content">
+        <!-- Header with gradient background -->
+        <div class="form-header">
+            <h2 class="form-title">
+                <mat-icon>delete</mat-icon>
+                Supprimer le Module
+            </h2>
+            <p class="form-subtitle">Confirmation de suppression</p>
+        </div>
+
+        <!-- Warning section -->
+        <div class="warning-section">
+            <div class="warning-icon-container">
+                <mat-icon class="warning-icon">warning</mat-icon>
+            </div>
+
+            <div class="confirmation-message">
+                <h3 class="confirmation-title">Confirmer la suppression</h3>
+                <p class="confirmation-text">
+                    Êtes-vous sûr de vouloir supprimer ce module ?
+                    <br>
+                    <span class="warning-text">Cette action est irréversible.</span>
+                </p>
+            </div>
+
+            <!-- Details of item to delete -->
+            <div class="item-details" *ngIf="info">
+                <div class="detail-card">
+                    <mat-icon class="detail-icon">extension</mat-icon>
+                    <div class="detail-info">
+                        <span class="detail-label">Module à supprimer :</span>
+                        <span class="detail-value">{{ info.moduleNom || 'Non spécifié' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+            <button mat-raised-button
+                    class="action-btn danger-btn"
+                    (click)="postDeletes(info)">
+                <mat-icon>delete_forever</mat-icon>
+                Confirmer la suppression
+            </button>
+            <button mat-stroked-button
+                    class="action-btn cancel-btn"
+                    (click)="onNoClick()"
+                    tabindex="-1">
+                <mat-icon>cancel</mat-icon>
+                Annuler
+            </button>
+        </div>
+    </div>
+</div>

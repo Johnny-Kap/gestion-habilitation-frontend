@@ -1,0 +1,485 @@
+/* Variables CSS pour la cohérence des couleurs */
+:root {
+  --primary-color: #ca2020;
+  --primary-light: #e53935;
+  --primary-dark: #b71c1c;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --danger-color: #f44336;
+  --info-color: #2196f3;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #424242;
+  --white: #ffffff;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+}
+
+/* Container principal */
+.dashboard-main-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  height: auto;
+  overflow: visible;
+}
+
+/* Sections côte à côte */
+.dashboard-sections {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.dashboard-section {
+  flex: 1;
+  min-width: 600px;
+  max-width: 100%;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+}
+
+/* S'assurer que toutes les sections sont visibles */
+#fonction, #application {
+  width: 100% !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Cartes de section */
+.section-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  overflow: visible !important;
+  transition: box-shadow 0.3s ease;
+  display: block !important;
+  visibility: visible !important;
+}
+
+.section-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* En-tête de carte */
+.card-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  padding: 1.5rem 2rem;
+  color: var(--white);
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-title i {
+  font-size: 1.25rem;
+}
+
+/* Section de recherche */
+.search-section {
+  padding: 1.5rem 2rem;
+  background: var(--light-gray);
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.search-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-field {
+  min-width: 300px;
+  flex: 1;
+}
+
+.search-btn {
+  height: 56px;
+  padding: 0 2rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+/* Container de table */
+.table-container {
+  padding: 2rem;
+  overflow: visible;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.table-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.add-btn {
+  background: var(--primary-color);
+  color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.add-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* Styles de table modernes */
+::ng-deep .modern-table {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+::ng-deep .modern-table .p-datatable-thead > tr > th {
+  background: var(--light-gray);
+  border: none;
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+::ng-deep .modern-table .p-datatable-tbody > tr > td {
+  border: none;
+  padding: 1rem;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+::ng-deep .modern-table .p-datatable-tbody > tr:hover {
+  background: rgba(202, 32, 32, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+::ng-deep .modern-table .p-datatable-tbody > tr.selected {
+  background: rgba(202, 32, 32, 0.1);
+}
+
+::ng-deep .p-datatable .p-datatable-header {
+  border: none !important;
+}
+
+
+/* En-têtes de table */
+.table-header-row {
+  background: var(--light-gray);
+}
+
+.table-header-cell {
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-content mat-icon {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+/* Cellules de table */
+.table-row {
+  transition: all 0.3s ease;
+}
+
+.table-row:hover {
+  background: rgba(202, 32, 32, 0.05);
+  transform: translateY(-1px);
+}
+
+.table-row.selected {
+  background: rgba(202, 32, 32, 0.1);
+}
+
+.table-cell {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.id-cell {
+  width: 120px;
+}
+
+.id-badge {
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.name-cell {
+  flex: 1;
+}
+
+.name-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.function-icon, .app-icon {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.function-name, .app-name {
+  font-weight: 500;
+  color: var(--dark-gray);
+}
+
+/* Actions */
+.actions-cell {
+  width: 180px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.action-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.view-btn {
+  color: var(--info-color);
+  background: rgba(33, 150, 243, 0.1);
+}
+
+.view-btn:hover {
+  background: var(--info-color);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+.edit-btn {
+  color: var(--warning-color);
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.edit-btn:hover {
+  background: var(--warning-color);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+.delete-btn {
+  color: var(--danger-color);
+  background: rgba(244, 67, 54, 0.1);
+}
+
+.delete-btn:hover {
+  background: var(--danger-color);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+/* Message vide */
+.empty-message {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.no-data-icon {
+  font-size: 4rem;
+  color: var(--medium-gray);
+}
+
+.no-data-container h3 {
+  margin: 0;
+  color: var(--dark-gray);
+  font-weight: 500;
+}
+
+.no-data-container p {
+  margin: 0;
+  color: #666;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Configuration des couleurs Material */
+::ng-deep .mat-mdc-raised-button.mat-primary {
+  --mdc-filled-button-container-color: var(--primary-color);
+  --mdc-filled-button-label-text-color: var(--white);
+}
+
+::ng-deep .mat-mdc-raised-button.mat-primary:hover {
+  --mdc-filled-button-container-color: var(--primary-dark);
+}
+
+::ng-deep .mat-mdc-form-field.mat-accent .mat-mdc-select-arrow {
+  color: var(--primary-color);
+}
+
+::ng-deep .mat-mdc-form-field.mat-accent .mdc-notched-outline__leading,
+::ng-deep .mat-mdc-form-field.mat-accent .mdc-notched-outline__notch,
+::ng-deep .mat-mdc-form-field.mat-accent .mdc-notched-outline__trailing {
+  border-color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .dashboard-sections {
+    flex-direction: column;
+  }
+
+  .dashboard-section {
+    max-width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-main-container {
+    margin: 1rem auto;
+    padding: 0 0.5rem;
+  }
+
+  .card-header {
+    padding: 1rem;
+  }
+
+  .search-section {
+    padding: 1rem;
+  }
+
+  .table-container {
+    padding: 1rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    align-items: initial !important;
+  }
+
+  .search-field {
+    min-width: auto;
+  }
+
+  .table-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+}
+
+/* Styles de pagination PrimeNG */
+::ng-deep .modern-table .p-paginator {
+  border: none;
+  background: var(--light-gray);
+  padding: 1rem;
+  border-top: 1px solid var(--medium-gray);
+}
+
+::ng-deep .modern-table .p-paginator .p-paginator-pages .p-paginator-page {
+  background: var(--white);
+  border: 1px solid var(--medium-gray);
+  color: var(--dark-gray);
+  min-width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.125rem;
+  border-radius: 4px;
+}
+
+::ng-deep .modern-table .p-paginator .p-paginator-pages .p-paginator-page:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+::ng-deep .modern-table .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+::ng-deep .modern-table .p-paginator .p-paginator-first,
+::ng-deep .modern-table .p-paginator .p-paginator-prev,
+::ng-deep .modern-table .p-paginator .p-paginator-next,
+::ng-deep .modern-table .p-paginator .p-paginator-last {
+  background: var(--white);
+  border: 1px solid var(--medium-gray);
+  color: var(--dark-gray);
+  min-width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.125rem;
+  border-radius: 4px;
+}
+
+::ng-deep .modern-table .p-paginator .p-paginator-first:hover,
+::ng-deep .modern-table .p-paginator .p-paginator-prev:hover,
+::ng-deep .modern-table .p-paginator .p-paginator-next:hover,
+::ng-deep .modern-table .p-paginator .p-paginator-last:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+::ng-deep .modern-table .p-paginator .p-dropdown {
+  border-color: var(--medium-gray);
+  background: var(--white);
+}
+
+::ng-deep .modern-table .p-paginator .p-dropdown:hover {
+  border-color: var(--primary-color);
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index:20000 !important;
+}
