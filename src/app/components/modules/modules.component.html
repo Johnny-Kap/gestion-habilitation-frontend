@@ -47,6 +47,12 @@
                                 Nom du Module
                             </div>
                         </th>
+                        <th class="table-header-cell">
+                            <div class="header-content">
+                                <mat-icon>extension</mat-icon>
+                                Nom de l'application
+                            </div>
+                        </th>
                         <th class="table-header-cell actions-header">
                             <div class="header-content">
                                 <mat-icon>settings</mat-icon>
@@ -64,6 +70,12 @@
                             <div class="name-content">
                                 <mat-icon class="module-icon">extension</mat-icon>
                                 <span class="module-name">{{item.mnom}}</span>
+                            </div>
+                        </td>
+                        <td class="table-cell name-cell">
+                            <div class="name-content">
+                                <mat-icon class="module-icon">extension</mat-icon>
+                                <span class="module-name">{{item.application.appNom}}</span>
                             </div>
                         </td>
                         <td class="table-cell actions-cell">
@@ -84,7 +96,7 @@
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="3" class="empty-message">
+                        <td colspan="4" class="empty-message">
                             <div class="no-data-container">
                                 <mat-icon class="no-data-icon">extension</mat-icon>
                                 <h3>Aucun module disponible</h3>

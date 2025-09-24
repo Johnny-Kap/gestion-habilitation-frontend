@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ShareService } from './share.service';
+import { EnvironmentService } from '../../../services/environment.service';
 // import { AfbcoreService } from 'afbcore';
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ public static globalapi;
   constructor(
     // private afbcore: AfbcoreService,
     private service: ShareService,
-    private http: HttpClient
+    private http: HttpClient,
+    private environmentService: EnvironmentService
 
   ) { }
 
@@ -26,11 +28,12 @@ public static globalapi;
     // headers = headers.set("Authorization", "Basic " + btoa(this.afbcore.userName + ":" + this.afbcore.password))
     return new Promise<void>((resolve,reject) =>
       {
-        // Configuration temporaire pour le développement
-        //this.service.apiHost = "http://localhost:8080/gestionhabilitation-service/rest/api";
-        this.service.apiHost = "http://192.168.11.75:9001/gestionhabilitation-service/api/v1";
+        // Configuration depuis assets/env.js
+        const apiBaseUrl = this.environmentService.apiBaseUrl;
+        this.service.apiHost = apiBaseUrl;
         console.log("NOST API IS", this.service.apiHost)
-        this.url = "http://192.168.11.75:9001";
+        // Extraire l'URL de base (sans /api)
+        this.url = apiBaseUrl.replace('/api', '');
         AppinitService.globalapi = this.url;
         this.service.apiGED = "http://localhost:8080/ged";
 
