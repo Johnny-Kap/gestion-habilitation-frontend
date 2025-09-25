@@ -19,12 +19,13 @@
                         <mat-form-field appearance="outline" class="form-field">
                             <mat-label>Application</mat-label>
                             <mat-select [(ngModel)]="mySelectmeme1" (selectionChange)="selectChangememe1()" name="appNom">
-                                <mat-option *ngFor="let itemmeme1 of usersmeme1" [value]="itemmeme1.appId">
+                                <mat-option *ngFor="let itemmeme1 of usersmeme1" [value]="itemmeme1.applicationId">
                                     {{itemmeme1.appNom}}
                                 </mat-option>
                             </mat-select>
                             <mat-icon matSuffix>apps</mat-icon>
                         </mat-form-field>
+ 
 
                         <mat-form-field appearance="outline" class="form-field">
                             <mat-label>Module</mat-label>

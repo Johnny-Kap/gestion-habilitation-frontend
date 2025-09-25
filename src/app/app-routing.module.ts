@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: '',
     component: BodyComponent,
-    canActivate: [AuthGuard], // Temporairement désactivé pour le dev
+    canActivate: [AuthGuard], 
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'index', component: IndexComponent },

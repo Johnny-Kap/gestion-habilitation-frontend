@@ -83,13 +83,18 @@ export class DashboardsimulationComponent implements OnInit {
     public ref: DynamicDialogRef,/* private afbcore: AfbcoreService, */
     public config: DynamicDialogConfig, private api: ConsultService, public dialog: MatDialog) { }
   ngOnInit(): void {
+    // Initialisation explicite
+    this.mySelectmeme1 = '';
+    this.usersmeme1 = [];
+
     this.formValue = this.formBuilder.group({})
     this.getmeme();
     if (this.config.data != null && this.config.data != undefined) this.info = this.config.data.obj;
     if (this.config.data != null && this.config.data != undefined) this.infomodule = this.config.data.obj;
- this.getAllfonction();
- this.getmeme1();
+    this.getAllfonction();
+    this.getmeme1();
 
+    console.log("ngOnInit - mySelectmeme1 initialisé:", this.mySelectmeme1);
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -97,17 +102,51 @@ export class DashboardsimulationComponent implements OnInit {
     console.log("filterValue focntion",this.chosenstring);
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+  
   getmeme1() {
-    this.api.getAllapplicationapi().subscribe(res =>
-      this.usersmeme1 = res);
+    this.api.getAllapplicationapi().subscribe(res => {
+      this.usersmeme1 = res;
+      console.log("Applications chargées:", this.usersmeme1);
+
+      // Debug détaillé de la structure des données
+      this.usersmeme1.forEach((app, index) => {
+        console.log(`Application ${index}:`, app);
+        console.log(`- appId:`, app.applicationId);
+        console.log(`- appNom:`, app.appNom);
+        console.log(`- Toutes les propriétés:`, Object.keys(app));
+      });
+    });
   }
 
 
-  selectChangememe1(){
-    console.log("code categie of segment selected is", this.mySelectmeme1)
+  selectChangememe1(event?: any){
+    console.log("Event selectChangememe1 déclenché!");
+    console.log("Event data:", event);
+    console.log("Event target:", event.target);
+    console.log("Event target value:", event.target.value);
+    console.log("Event target selectedIndex:", event.target.selectedIndex);
+    console.log("Event target options:", event.target.options);
 
+    if(event.target.options && event.target.selectedIndex >= 0) {
+      const selectedOption = event.target.options[event.target.selectedIndex];
+      console.log("Selected option:", selectedOption);
+      console.log("Selected option value:", selectedOption.value);
+      console.log("Selected option text:", selectedOption.text);
+    }
 
+    // Récupérer la valeur depuis l'événement
+    const selectedValue = event.target.value;
+    this.mySelectmeme1 = selectedValue;
 
+    console.log("Valeur récupérée de l'événement:", selectedValue);
+    console.log("Application sélectionnée - ID:", this.mySelectmeme1);
+    console.log("usersmeme1 data:", this.usersmeme1);
+
+    if(this.usersmeme1 && this.usersmeme1.length > 0 && this.mySelectmeme1) {
+      console.log("Application sélectionnée - Objet:", this.usersmeme1.find(app => app.appId == this.mySelectmeme1));
+    } else {
+      console.log("usersmeme1 est vide ou mySelectmeme1 est vide");
+    }
   }
   
 
@@ -175,14 +214,20 @@ export class DashboardsimulationComponent implements OnInit {
 
   postApplication(info) {
     this.infomodule.mnomm=info.mnom;
-    this.infomodule.applicationIdss=this.mySelectmeme1;
-console.log("INFORMATION",this.infomodule)
- this.api.postmodule(this.infomodule)
+
+    if(!this.mySelectmeme1){
+      alert('Veuillez sélectionner une application');
+      return;
+    }
+
+    this.infomodule.applicationIdss = this.mySelectmeme1;
+    console.log("INFORMATION",this.infomodule)
+    this.api.postmodule(this.infomodule)
     .subscribe(res => {
       console.log("ressp",res.moduleId)
       // TODO: Remplacer par la nouvelle méthode de notification
       // this.afbcore.showMessage('SUCCESS', 'Module  ajouté avec Success');
-      alert('Module  ajouté avec Success');
+      alert('Module  ajouté avec Succès');
 
      //alert("Module  ajouté avec Success")
      window.location.reload();

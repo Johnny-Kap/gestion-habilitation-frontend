@@ -14,53 +14,53 @@ export class ConsultService {
   public URL_nomen: String="http://192.168.11.75:9001/nomenclature-service/rest/api/nomenclature";
     public URL_cont_se: any="http://192.168.11.75:9001/seuilusure-service/rest/api/controleseuilusure";
     //public URL: any="http://localhost:8080/api/v1";
-   public URL: any="http://192.168.11.75:9001/gestionhabilitation-service/api/v1";
+   public URL: any="http://192.168.11.75:9001/api/v1";
 
   isLoggedIn$ = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) { }
   getsingleModule(mnom: string) {
-    return this.http.get<any>(AppinitService.globalapi+`/gestionhabilitation-service/api/v1/getappmodull/${mnom}`)
+    return this.http.get<any>(AppinitService.globalapi+`/api/v1/getappmodull/${mnom}`)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   deleteModules(id: number) {
-    return this.http.delete<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/deletemodule/"+id)
+    return this.http.delete<any>(AppinitService.globalapi+"/api/v1/deletemodule/"+id)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   getAllModulesapi() {
-    return this.http.get<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/getallmodules")
+    return this.http.get<any>(AppinitService.globalapi+"/api/v1/getallmodules")
     .pipe(map((res: any) => {
       return res;
     }))
   }
   updateModuleapi(data: any,id: number) {
-    return this.http.put<any>(AppinitService.globalapi+`/gestionhabilitation-service/api/v1/updatemodule/${id}`, data)
+    return this.http.put<any>(AppinitService.globalapi+`/api/v1/updatemodule/${id}`, data)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   updateApplication(data: any,id: number) {
-    return this.http.put<any>(AppinitService.globalapi+`/gestionhabilitation-service/api/v1/updateapplication/${id}`, data)
+    return this.http.put<any>(AppinitService.globalapi+`/api/v1/updateapplication/${id}`, data)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   updateFonction(data: any,id: number) {
-    return this.http.put<any>(AppinitService.globalapi+`/gestionhabilitation-service/api/v1/updatefonction/${id}`, data)
+    return this.http.put<any>(AppinitService.globalapi+`/api/v1/updatefonction/${id}`, data)
       .pipe(map((res: any) => {
         return res;
       }))
   }
   postfonction(data: any) {
-    return this.http.post<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/addfonctions", data)
+    return this.http.post<any>(AppinitService.globalapi+"/api/v1/addfonctions", data)
       .pipe(map((res: any) => {
         return res;
       }))
@@ -68,7 +68,7 @@ export class ConsultService {
 
 
   postapplication(data: any) {
-    return this.http.post<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/addapplication", data)
+    return this.http.post<any>(AppinitService.globalapi+"/api/v1/addapplication", data)
       .pipe(map((res: any) => {
         return res;
       }))
@@ -76,7 +76,7 @@ export class ConsultService {
 
 
   postmodule(data: any) {
-    return this.http.post<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/ajoutappmodule", data)
+    return this.http.post<any>(AppinitService.globalapi+"/api/v1/ajoutappmodule", data)
       .pipe(map((res: any) => {
         return res;
       }))
@@ -84,69 +84,69 @@ export class ConsultService {
 
   
   postfonctionApplimodule(data: any) {
-    return this.http.post<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/ajoutfonctionappmodule", data)
+    return this.http.post<any>(AppinitService.globalapi+"/api/v1/ajoutfonctionappmodule", data)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   postApplimodule(data: any) {
-    return this.http.post<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/addapplicationmodule", data)
+    return this.http.post<any>(AppinitService.globalapi+"/api/v1/addapplicationmodule", data)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   getAllapplicationapi() {
-    return this.http.get<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/getallapplicdation")
+    return this.http.get<any>(AppinitService.globalapi+"/api/v1/getallapplication")
     .pipe(map((res: any) => {
       return res;
     }))
   }
   getAllmoduleapi() {
-    return this.http.get<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/getallmodules")
+    return this.http.get<any>(AppinitService.globalapi+"/api/v1/getallmodules")
     .pipe(map((res: any) => {
       return res;
     }))
   }
 
   getUsersme() {
-    return this.http.get<any>(this.URL_nomen+"/gestionhabilitation-service/api/v1/findbycategorie/012")
+    return this.http.get<any>(this.URL_nomen+"/api/v1/findbycategorie/012")
     .pipe(map((res: any) => {
       return res.datas;
     }))
   }
 
   getsingleFonction(fnom: string) {
-    return this.http.get<any>(AppinitService.globalapi+`/gestionhabilitation-service/api/v1/getappfonction/${fnom}`)
+    return this.http.get<any>(AppinitService.globalapi+`/api/v1/getappfonction/${fnom}`)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   getsingleFonctionList(fnom: string) {
-    return this.http.get<any>(AppinitService.globalapi+`/gestionhabilitation-service/api/v1/getappfonctionList/${fnom}`)
+    return this.http.get<any>(AppinitService.globalapi+`/api/v1/getappfonctionList/${fnom}`)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   getsingleApplication(nom: string) {
-    return this.http.get<any>(AppinitService.globalapi+`/gestionhabilitation-service/api/v1/getspecificapp/${nom}`)
+    return this.http.get<any>(AppinitService.globalapi+`/api/v1/getspecificapp/${nom}`)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   getCorrespondmodperapp(id: number) {
-    return this.http.get<any>(AppinitService.globalapi+`/gestionhabilitation-service/api/v1/gettallapi/${id}`)
+    return this.http.get<any>(AppinitService.globalapi+`/api/v1/gettallapi/${id}`)
       .pipe(map((res: any) => {
         return res;
       }))
   }
 
   getAllfonction() {
-    return this.http.get<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/getallfonction")
+    return this.http.get<any>(AppinitService.globalapi+"/api/v1/getallfonction")
       .pipe(map((res: any) => {
         return res;
       }))
@@ -194,7 +194,7 @@ export class ConsultService {
       }))
   }
   getEmployee() {
-    return this.http.get<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/getallfonction")
+    return this.http.get<any>(AppinitService.globalapi+"/api/v1/getallfonction")
       .pipe(map((res: any) => {
         return res;
       }))
@@ -202,7 +202,7 @@ export class ConsultService {
 
 
   getEmployeeTeg() {
-    return this.http.get<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/calculteg/getall")
+    return this.http.get<any>(AppinitService.globalapi+"/api/v1/calculteg/getall")
       .pipe(map((res: any) => {
         return res;
       }))
@@ -251,13 +251,13 @@ export class ConsultService {
 
 
   deleteFonction(id: number) {
-    return this.http.delete<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/deletefonction/"+id)
+    return this.http.delete<any>(AppinitService.globalapi+"/api/v1/deletefonction/"+id)
       .pipe(map((res: any) => {
         return res;
       }))
   }
   deleteApplication(id: number) {
-    return this.http.delete<any>(AppinitService.globalapi+"/gestionhabilitation-service/api/v1/deleteappl/"+id)
+    return this.http.delete<any>(AppinitService.globalapi+"/api/v1/deleteappl/"+id)
       .pipe(map((res: any) => {
         return res;
       }))

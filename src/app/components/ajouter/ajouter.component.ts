@@ -80,7 +80,7 @@ export class AjouterComponent implements OnInit {
 
   selectChangememe1(){
     this.mySelectApplicationint= Number(this.mySelectApplication);
-    console.log("TEDONG",this.mySelectApplication);
+    console.log("App ",this.mySelectApplication);
 
     this.api.getsingleFonction(this.chosenstring).subscribe(res =>{
       this.moduleset = res;
@@ -98,6 +98,7 @@ export class AjouterComponent implements OnInit {
     this.api.getCorrespondmodperapp(this.mySelectApplicationint)
       .subscribe(res => {
         this.optionsmodule = res;
+        console.log("Modules : ", this.optionsmodule);
       this.getmodperap();
 
 
