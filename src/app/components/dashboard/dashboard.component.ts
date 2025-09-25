@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   // infoappmofon: AddmodFonctionmodel = {appId: -1, fonctionId: -1,moduleIds:[] };
 
   info: any = {};
-  infoapplication : any = {};
+  infoapplication: any = {};
 
   public usersmeme: any[] = [];
   public usersmeme1: any[] = [];
@@ -79,9 +79,9 @@ export class DashboardComponent implements OnInit {
 
     this.onSaveUsernameChanged(this.info.value);
     this.getmeme();
-     this.getmeme1();
-     this.getAllEmployee();
-     this.getAllApplication();
+    this.getmeme1();
+    this.getAllEmployee();
+    this.getAllApplication();
 
     this.formValue = this.formBuilder.group({})
     //  this.info.actif = false;
@@ -113,13 +113,13 @@ export class DashboardComponent implements OnInit {
   }
 
 
-selectChangememe1() {
-  console.log("APPLICATION selected is", this.mySelectmeme1)
-  this.api.getAllapplicationapi().subscribe(res =>
-    this.usersme = res)
-  this.val2 = this.mySelectmeme1;
-  console.log("APPLICATION1  " + this.val1)
-}
+  selectChangememe1() {
+    console.log("APPLICATION selected is", this.mySelectmeme1)
+    this.api.getAllapplicationapi().subscribe(res =>
+      this.usersme = res)
+    this.val2 = this.mySelectmeme1;
+    console.log("APPLICATION1  " + this.val1)
+  }
 
 
   selectChangeme() {
@@ -149,8 +149,8 @@ selectChangememe1() {
 
 
   searchfonction(info) {
-    info.fnom=this.val1;
-    console.log("info.fnom"+info.fnom)
+    info.fnom = this.val1;
+    console.log("info.fnom" + info.fnom)
     this.api.getsingleFonctionList(info.fnom)
       .subscribe(res => {
         this.employeeData = res;
@@ -163,8 +163,8 @@ selectChangememe1() {
   }
 
   searchapplication(infoapplication) {
-    infoapplication.nom=this.val2;
-    console.log("info.nom"+ infoapplication.nom)
+    infoapplication.nom = this.val2;
+    console.log("info.nom" + infoapplication.nom)
     this.api.getsingleApplication(infoapplication.nom)
       .subscribe(res => {
         this.employeeDataapplication = res;
@@ -193,7 +193,7 @@ selectChangememe1() {
 
   }
 
- 
+
 
   onView(obj) {
     let data = obj;
@@ -313,7 +313,7 @@ selectChangememe1() {
     this.router.navigate(['login'])
     localStorage.clear();
   }
- 
+
 
 
 
